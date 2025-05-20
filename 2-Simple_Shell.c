@@ -44,15 +44,16 @@
 		{
 			if (execve(argv[0], argv, NULL) == -1)
 			{
-				printf("Line 34\n");
-				printf("$ ");
-				perror("ERRor");
+				perror("./shell");
+				exit(EXIT_FAILURE); /* Exit child on failure */
 			}
-			else
-			{
-				printf("Line 42\n");
-			}
-	 	}
+		}
+		else
+		{
+			/* Parent wait for the child to finish */
+			wait(&status);
+			printf("$ "); /* Show prompt again */
+		}
 	}
  printf("Line 39\n");
 	 free(lptr);
