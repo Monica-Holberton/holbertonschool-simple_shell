@@ -25,29 +25,30 @@
 	 char *lptr = NULL;
 	 size_t len = 0;
 	 ssize_t read;
-	 char *argv;
+	 char *argv[64];
 
 	 /* Read lines until EOF (Ctrl+D) */
 	 while ((read = getline(&lptr, &len, stdin)) != -1)
 	 {
 		printf("Line 32\n");
-		pid_t pid = fork();
-		if (pid == 0)
+		if (argv['\n'])
 		{
-			if (execve(argv[0], argv, NULL) == -1)
-			{
-				printf("Line 34\n");
-				printf("$ ");
-				perror("ERRor");
+			printf("empty argv");
+		}
+		else if (execve(argv[0], argv, NULL) == -1)
+		{
+
+			printf("Line 34\n");
+			printf("$ ");
+			perror("ERRor");
+		}
+		else{
+			break;
 			}
-			else
-			{
-				printf("Line 42\n");
-			}
-	 	}
 	}
- printf("Line 39\n");
+ 	printf("Line 39\n");
 	 free(lptr);
-	 printf("\n"); /* Clean newline after Ctrl+D */
+	 printf("\n");
 	 return (0);
- }
+
+}
