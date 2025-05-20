@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/wait.h> /* for wait() */
+
 
 /**
  * main - A very simple UNIX command line interpreter
@@ -18,18 +20,24 @@
 
  void __attribute__ ((constructor)) premain()
  {
-	 printf("$ ");
+	 printf("$ "); /* Print ($) once when the program starts */
  }
  int main(void)
  {
 	 char *lptr = NULL;
 	 size_t len = 0;
 	 ssize_t read;
-	 char *argv;
+	 char *argv[2]; /* to pass only 1 command, no arguments, NULL-terminated */
+	 pid_t pid;
+	 int status;
 
 	 /* Read lines until EOF (Ctrl+D) */
 	 while ((read = getline(&lptr, &len, stdin)) != -1)
 	 {
+		/* Remove the newline at the end of input */
+		if (lptr[read - 1] == '\n')
+			lptr[read - 1] = '\0';
+
 		printf("Line 32\n");
 		pid_t pid = fork();
 		if (pid == 0)
