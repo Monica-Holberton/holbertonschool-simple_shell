@@ -27,7 +27,7 @@ int main(void)
     char *argv[2];    
     int status;          /* Status from wait */
     pid_t pid;           /* Process ID from fork */
-	extern char **environ; 
+	/*extern char **environ;*/
 
 /* Infinite loop until EOF */
     while (1)  
