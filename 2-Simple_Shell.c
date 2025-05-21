@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stddef.h>
 #include <unistd.h>
+#include <errno.h>      /* For perror */
 #include <sys/types.h>  /* For pid_t */
 #include <sys/wait.h>   /* For wait */
 
@@ -49,6 +50,7 @@ int main(void)
 		/*To resolve /bin/ commands*/
 		char path[1024];
         snprintf(path, sizeof(path), "/bin/%s", lptr);
+        argv[0] = path;
 
         pid = fork();  /* Create a child process */
 
@@ -63,10 +65,11 @@ int main(void)
             /* Attempt to execute the command */
             if (execve(argv[0], argv, NULL) == -1)
             {
-                printf("ERROR\n");  /* Print error if execve fails */
+                fprintf("ERROR\n");  /* Print error if execve fails */
 				/*perror("execve");*/
-                return (1);        /* Exit child process with failure */
-            }
+				exit(0); /* inside the child process, Exit when fail */
+				/* if the command doesn’t exist or isn't executable*/
+		    }
         }
         else  /* Parent process */
         {
