@@ -56,8 +56,8 @@ int main(void)
 
         if (pid == -1)  /* Fork failed */
         {
-            printf("fork failed\n");
-            continue;       /* reading the next command */
+            printf("Fork Failed\n");
+			exit(1);  /* Exit the program if fork fails */
         }
 
         if (pid == 0)  /* Child process */
@@ -67,7 +67,7 @@ int main(void)
             {
                 fprintf("ERROR\n");  /* Print error if execve fails */
 				/*perror("execve");*/
-				exit(0); /* inside the child process, Exit when fail */
+				exit(1); /* inside the child process, Exit when fail */
 				/* if the command doesn’t exist or isn't executable*/
 		    }
         }
