@@ -42,13 +42,13 @@
 			{
 				if (execve(argv[0], argv, NULL) == -1)
 				{
-					printf("Errort\n");
+					printf("Error 1\n"); /*EXIT*/
 					printf("$ ");
-					/*perror("ERRor");*/
+
 				}
 				else
 				{
-					printf("No command entered\n");
+					printf("No command entered\n");/*EXIT*/
 				}
 			}
 	 	}
@@ -58,7 +58,7 @@
 	}
  	printf("Line 39\n");
 	 free(lptr);
-	 printf("\n");
+	 printf("\n");/*EXIT*/
 	 return (0);
 
 }
