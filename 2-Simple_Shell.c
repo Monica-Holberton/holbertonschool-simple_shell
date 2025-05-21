@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 /**
  * main - A very simple UNIX command line interpreter
@@ -25,26 +27,34 @@
 	 char *lptr = NULL;
 	 size_t len = 0;
 	 ssize_t read;
-	 char *argv[64];
+	 char *argv[2];
+	 int status;
 
 	 /* Read lines until EOF (Ctrl+D) */
 	 while ((read = getline(&lptr, &len, stdin)) != -1)
 	 {
 		printf("Line 32\n");
-		if (argv['\n'])
+		pid_t pid = fork();
+		if (pid == 0)
 		{
-			printf("empty argv");
-		}
-		else if (execve(argv[0], argv, NULL) == -1)
-		{
-
-			printf("Line 34\n");
-			printf("$ ");
-			perror("ERRor");
-		}
-		else{
-			break;
+			argv[0] = lptr;
+			if (len != 0)
+			{
+				if (execve(argv[0], argv, NULL) == -1)
+				{
+					printf("Errort\n");
+					printf("$ ");
+					/*perror("ERRor");*/
+				}
+				else
+				{
+					printf("No command entered\n");
+				}
 			}
+	 	}
+		else if (pid > 0) {
+			wait(&status);
+		}
 	}
  	printf("Line 39\n");
 	 free(lptr);
