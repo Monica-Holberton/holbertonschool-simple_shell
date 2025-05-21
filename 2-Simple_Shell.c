@@ -50,20 +50,24 @@ int main(void)
 			exit(1);  /* Exit the program if fork fails */
         }
 
-        if (pid == 0)  /* Child process */
+        if (pid == 0 && read>1)  /* Child process */
         {
+			argv[0] = lptr;
+            // i should exit here
             /* Attempt to execute the command */
-            if (execve(argv[0], argv, NULL) == -1)
+        if (execve(argv[0], argv, NULL) == -1)
             {
-                fprintf("ERROR\n");  /* Print error if execve fails */
+                printf("ERROR\n");  /* Print error if execve fails */
 				/*perror("execve");*/
 				exit(1); /* inside the child process, Exit when fail */
-				/* if the command doesn’t exist or isn't executable*/
+				        /* if the command doesn’t exist or isn't executable*/
 		    }
         }
         else  /* Parent process */
         {
             wait(&status);  /* Wait for the child process to finish */
+			// if I reach here with no process I should exit 
+			
 			printf("\n");
         }
     }
