@@ -31,8 +31,9 @@
 	 int status;
 
 	 /* Read lines until EOF (Ctrl+D) */
-	 while ((read = getline(&lptr, &len, stdin)) != -1)
-	 {
+	 while (1){
+
+		read = getline(&lptr, &len, stdin) != -1;
 		printf("Line 32\n");
 		pid_t pid = fork();
 		if (pid == 0)
@@ -40,25 +41,34 @@
 			argv[0] = lptr;
 			if (len != 0)
 			{
-				if (execve(argv[0], argv, NULL) == -1)
+				if (execve(argv[0], argv, NULL) != -1)
 				{
-					printf("Error 1\n");
+					printf("place 1\n");
 					printf("$ ");
 
 				}
+
 				else
 				{
 					printf("No command entered\n");/*EXIT*/
+					exit(1);
 				}
 			}
-	 	}
-		else if (pid > 0) {
-			wait(&status);
-		}
-	}
- 	printf("Line 39\n");
-	 free(lptr);
-	 printf("\n");/*EXIT*/
-	 return (0);
+			else {
+				printf("out\n");
+				exit(1);
 
+			}
+	 	}
+		/*--------------------------------------------------------------------------------*/
+
+	    else
+        {
+            wait(&status);
+		}
+    }
+
+    free(lptr);
+    printf("\n");
+    return (0);
 }
