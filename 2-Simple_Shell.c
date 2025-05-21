@@ -38,19 +38,9 @@ int main(void)
         if (read == -1)   /* If EOF (Ctrl+D) or error, exit loop */
             break;
 		
-			/*path resolution logic, allow the user to add a command like ls*/
-			/* The shell won’t find it unless the full path is typed (/bin/ls)*/
-		if (lptr[read - 1] == '\n')
-            lptr[read - 1] = '\0';
-		
         /* Prepare argv for execve: command is first argument, NULL */
         argv[0] = lptr;
         argv[1] = NULL;
-
-		/*To resolve /bin/ commands*/
-		char path[1024];
-        snprintf(path, sizeof(path), "/bin/%s", lptr);
-        argv[0] = path;
 
         pid = fork();  /* Create a child process */
 
