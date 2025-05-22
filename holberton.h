@@ -16,17 +16,26 @@
 
 /* Function Prototypes */
 
-/* Starts the shell loop */
-void start_shell(void);
-
-/* Checks if shell is running interactively */
-int is_interactive(void);
+int is_input(char *command);  /* Returns True or False */
 
 /* Prints the shell prompt ($) */
 void print_prompt(void);
 
 /* Reads command from standard input */
 ssize_t read_command(char **lineptr, size_t *n);
+
+/* Creates a child process to run a command */
+int execute(char *argv[]);
+
+/* Tokeniz the input line into arguments */
+void tokenize_command(char *line, char *argv);
+
+/* Checks if a command is a built-in */
+int is_builtin(char *command);  /* Returns True or False */
+
+/* Fork and Executes a built-in command */
+int execute_builtin(char *command);
+
 /* Execute command */
 int execute(char *argv[])
 #endif /* HOLBERTON_H */
