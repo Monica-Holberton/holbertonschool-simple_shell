@@ -62,12 +62,14 @@ int main(void)
 				exit(1); /* inside the child process, Exit when fail */
 				        /* if the command doesn’t exist or isn't executable*/
 		    }
-        }
+            exit(0);
+		}
         else  /* Parent process */
         {
             wait(&status);  /* Wait for the child process to finish */
-			// if I reach here with no process I should exit 
-			
+			perror("wait");       /* Print error if wait fails */
+            exit(1);              /* if I reach here with no process = exit */
+            }			
 			printf("\n");
         }
     }
@@ -76,3 +78,4 @@ int main(void)
     printf("\n"); /* Clean newline on exit after Ctrl+D */
     return (0);
 }
+
