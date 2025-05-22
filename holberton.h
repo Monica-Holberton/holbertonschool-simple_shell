@@ -27,6 +27,6 @@ void print_prompt(void);
 
 /* Reads command from standard input */
 ssize_t read_command(char **lineptr, size_t *n);
-
-
+/* Execute command */
+int execute(char *argv[])
 #endif /* HOLBERTON_H */
