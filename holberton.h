@@ -42,4 +42,8 @@ int execute(char *argv[]);
 /*Checks if the string is found in the Global Variable */
 bool in_path(char *string);
 
+/*Find a path */
+char *_which(const char *filename);
+
+
 #endif /* HOLBERTON_H */
