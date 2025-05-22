@@ -37,5 +37,9 @@ int is_builtin(char *command);  /* Returns True or False */
 int execute_builtin(char *command);
 
 /* Execute command */
-int execute(char *argv[])
+int execute(char *argv[]);
+
+/*Checks if the string is found in the Global Variable */
+bool in_path(char *string);
+
 #endif /* HOLBERTON_H */
