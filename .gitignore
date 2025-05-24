@@ -47,6 +47,8 @@
 *.idb
 *.pdb
 
+abubaker
+
 # Kernel Module Compile Results
 *.mod*
 *.cmd
