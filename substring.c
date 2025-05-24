@@ -14,12 +14,8 @@ char** split(char *string, char *delimiter)
         token = strtok(NULL, delimiter);
     }
     free(string_copy);
-    if (counter == 0)
-    {
-        return (NULL);
-    }
     sub_strings = malloc((counter * sizeof(char *)) + 1);
-    if (sub_strings == NULL)
+    if (sub_strings == NULL )
     {
         return (NULL);
     }
@@ -30,12 +26,12 @@ char** split(char *string, char *delimiter)
         sub_strings[i] = malloc(sizeof(strlen(token) + 1));
         if (sub_strings[i] == NULL)
         {
+            free(sub_strings);
             return (NULL);
         }
         strcpy(sub_strings[i], token);
         i++;
         token = strtok(NULL, delimiter);
     }
-    sub_strings[counter] = NULL;
     return (sub_strings);
 }
