@@ -1,0 +1,69 @@
+Man - Simple Shell
+
+NAME: hsh – A basic shell that runs commands just like the regular terminal.
+________________________________________
+
+DESCRIPTION: hsh is a small shell program that:
+•	Shows a prompt ($ ) and waits for the user to type a command.
+•	Runs programs by their name or full path (e.g. ls, /bin/ls).
+•	Supports commands with arguments (like ls -l).
+•	Searches for commands using the system’s PATH.
+•	Handles the exit command to quit the shell.
+•	Handles the env command to print the current environment.
+•	Handles errors (like command not found).
+•	Detects end-of-file (Ctrl+D) and exits properly.
+________________________________________
+
+Pseudocode:
+START
+1. Display a prompt ("$ ").
+2. Read user input from standard input.
+3. If input is EOF (Ctrl+D), exit shell.
+4. Remove newline character from the input.
+5. Split the input string into tokens (command and arguments).
+6. IF the command is "exit".
+     THEN exit the shell.
+7. ELSE IF the command is "env"
+     THEN print the environment variables.
+8. ELSE
+     - Check if the command exists (check full path or search in PATH).
+     - IF found
+         - Create a child process using fork()
+         - In the child:
+             - Execute the command using execve()
+         - In the parent:
+             - Wait for the child to finish
+     - ELSE
+         - Print an error message: "ERROR: Command Not Found".
+9. Go back to step 1 (while loop).
+END
+________________________________________
+
+HOW TO USE?
+1.	Compile the shell: gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+2.	Run it: ./hsh
+3.  A ($) prompt will appear in the terminal.
+4.	Type commands like: ls | pwd | echo Hello | $ env
+    - You'll see the expected output for each.
+5.  Type any unknown command (Not a built-in command), such as Hello!.
+    - Output (an error message): "ERROR: Command Not Found".
+6.	Then Ctrl-d to Exit the shell (EOF).
+________________________________________
+
+BUILT-IN COMMANDS:
+• exit: To exit the shell.
+• env : To print environment variables.
+• ls : To list files and directories. (Executed using PATH, not internally built-in.)
+• pwd : To print the current working directory. (Handled externally via PATH.)
+• cd : To change the current directory. (Not yet supported as a built-in.)
+• echo : To print arguments to standard output. (Executed using system's /bin/echo.)
+________________________________________
+
+NOTE:
+• This shell does not support advanced features like pipes (|), redirections (>, <), or semicolons (;).
+________________________________________
+
+Author,
+Monica
+                                   
+                                        ________________________________________

@@ -1,53 +1,16 @@
-#include "main.h"
+#include "holberton.h"
 
 /**
- * main - Entry point of the shell
- *
- * Return: 0 on success
+ * main - Simple shell loop
+ * Return: Always 0
  */
-int main(void)
+iint main(void)
 {
-	char *line = NULL;
-	size_t len = 0;
-	ssize_t nread;
-	pid_t pid;
-	int status;
+    char *input = "ls -l /";
+    char **args = split_string(input);
 
-	while (1)
-	{
-		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, "#cisfun$ ", 9);
+    for (int i = 0; args[i]; i++)
+        printf("arg[%d] = %s\n", i, args[i]);
 
-		nread = getline(&line, &len, stdin);
-		if (nread == -1)
-		{
-			free(line);
-			if (isatty(STDIN_FILENO))
-				write(STDOUT_FILENO, "\n", 1);
-			break;
-		}
-
-		/* Remove newline character */
-		if (line[nread - 1] == '\n')
-			line[nread - 1] = '\0';
-
-		if (line[0] == '\0')
-			continue;
-
-		pid = fork();
-		if (pid == 0)
-		{
-			execute_command(line);
-		}
-		else if (pid > 0)
-		{
-			wait(&status);
-		}
-		else
-		{
-			perror("fork");
-		}
-	}
-	free(line);
-    return (0);
+    return 0;
 }
