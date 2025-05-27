@@ -40,8 +40,8 @@ END
 ________________________________________
 
 HOW TO USE?
-1.	Compile the shell: gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
-2.	Run it: ./hsh
+1.	Compile the shell: gcc Simple_Shell.c Builtin.c Execute.c Split.c -o Test.o 
+2.	Run it: ./Test.o 
 3.  A ($) prompt will appear in the terminal.
 4.	Type commands like: ls | pwd | echo Hello | $ env
     - You'll see the expected output for each.
