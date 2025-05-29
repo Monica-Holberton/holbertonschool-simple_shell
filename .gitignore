@@ -47,7 +47,7 @@
 *.su
 *.idb
 *.pdb
-
+*core
 *.holberton
 
 # Kernel Module Compile Results

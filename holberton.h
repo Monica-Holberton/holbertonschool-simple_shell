@@ -49,7 +49,7 @@ bool in_path(char *string);
 /*Find a path */
 char *_which(char *filename);
 
-
+void env(void);
 int _atoi(char *string);
 #endif /* HOLBERTON_H */
 
