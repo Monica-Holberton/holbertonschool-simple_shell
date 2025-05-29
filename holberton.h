@@ -1,8 +1,11 @@
 #ifndef HOLBERTON_H
 #define HOLBERTON_H
+
+#define SIGINT 2;
 #include <stdio.h>
 #include <stdbool.h>
 
+#include <signal.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stddef.h>
