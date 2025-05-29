@@ -1,7 +1,7 @@
 #ifndef HOLBERTON_H
 #define HOLBERTON_H
 
-#define SIGINT 2;
+//#define SIGINT 2;
 #include <stdio.h>
 #include <stdbool.h>
 
