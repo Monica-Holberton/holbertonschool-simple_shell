@@ -1,6 +1,9 @@
 #ifndef HOLBERTON_H
 #define HOLBERTON_H
 
+#define MY_ENV "current"
+extern char *name;
+
 //#define SIGINT 2;
 #include <stdio.h>
 #include <stdbool.h>
@@ -51,6 +54,10 @@ bool in_path(char *string);
 
 /*Find a path */
 char *_which(char *filename);
+
+/*set & unset env*/
+int _setenv(char *value, int overwrite);
+int _unsetenv(char *name);
 
 
 int _atoi(char *string);
